@@ -9168,6 +9168,83 @@ After you upload your app to the Play Console, updating your app requires you to
 - Besprechen der Konzepte zur Netzwerkanbindung
 - Repetition und Ausblick
 
+#### Netzwerkkommunikation
+
+- Meistens über HTTP und JSON
+    - Retrofit / OkHttp, Volley,...
+    - Gson, Jackson
+
+- Netzwerkkommunikation ist teuer und fehleranfällig
+    - Nicht auf dem Main-Thread ausführen
+    - Gutes Error Handling (spezifische Fehlermeldungen)
+
+- Mobile spezifisch
+    - WIFI oder Mobile Daten
+      - Kann Kosten verursacht
+    - Stromsparmodus/Akku
+        - Jede Netzwerkoperation kostet Akku
+        - Keine Netzwerkoperationen im Doze Mode erlaubt
+        - Netzwerk ist nicht immer verfügbar oder langsam
+
+#### Testing
+
+![piramyd](img/piramyd.png)
+
+- Unit Tests
+    - Testen einzelne Unit
+    - schnell, kostengünstig, stabil
+    - Braucht nur JVM
+        - Schneller und stabiler
+        - Architektur muss testbar sein
+    - Tooling
+      - JUnit
+
+- Instrumented Tests
+    - Testet ganzes System
+    - teuer, eher instabil, eher langsam
+    - Braucht Android Umgebung
+      - Man kann auch Androidintegration testen
+    - Tooling
+      - Espresso
+
+#### App veröffentlichen
+
+- Möglichkeiten / Kanäle
+    - Google Play Store / Marketplace
+        - Grössere Reichweite (App ist auffindbar)
+          - Bewertungsverfahren integriert
+        - Vereinfachte Installation / Updates
+        - Vertrauen
+        - Payment ist integriert (In App Payment)
+- Webseite / E-Mail (Download)
+  - "Unsichere Quellen" müssen erlaubt
+
+#### App signieren
+
+- Wieso wird signiert?
+    - Hersteller verifizieren
+      - Updates kommen sicher vom selben Hersteller
+    - Dateiinhalt wurde nicht verändert
+- Wie funktioniert Signierung?
+    - Keystore (Public Key und Private Key)
+    - APK wird mit Private Key signiert	*
+    - Bei Installation: Android verifiziert Signatur und Hersteller mit Public Key
+    - Self-Signed Key
+- Upload Key (public und private) und App Signing Key (public und private)
+
+#### App versloniieren
+
+- VersionCode
+    - Ganzzahl (monton aufsteigend)
+    - "Eigentliche Version" die Android nutzt
+        - Überprüft ob ein Update erlaubt ist.
+        - VersionCode muss höher sein als der VersionCode der bereits installierten Version
+
+- VersionName
+    - Beliebiger String
+    - Für Nutzende sichtbar
+    - z.B. "1.0.2", "Tiger", "Lion"
+
 ### Nachbearbeitung
 
 ---
